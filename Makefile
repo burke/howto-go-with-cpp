@@ -1,16 +1,15 @@
-.PHONY: clean default
+.PHONY: clean
 
-howto-go-with-cpp: libfoo.a
+TARGET=howto-go-with-cpp
+
+$(TARGET): libfoo.a
 	go build .
 
 libfoo.a: foo.o cfoo.o
-	ar r libfoo.a foo.o cfoo.o
+	ar r $@ $^
 
-cfoo.o: cfoo.cpp
-	g++ -O2 -o cfoo.o -c cfoo.cpp
-
-foo.o: foo.cpp
-	g++ -O2 -o foo.o -c foo.cpp
+%.o: %.cpp
+	g++ -O2 -o $@ -c $^
 
 clean:
-	rm -f *.o *.so *.a howto-go-with-cpp
+	rm -f *.o *.so *.a $(TARGET)
