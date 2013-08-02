@@ -1,6 +1,6 @@
 .PHONY: clean default
 
-default: libfoo.a
+howto-go-with-cpp: libfoo.a
 	go build .
 
 libfoo.a: foo.o cfoo.o
@@ -13,4 +13,4 @@ foo.o: foo.cpp
 	g++ -fPIC -O2 -o foo.o -c foo.cpp
 
 clean:
-	rm -f *.o *.so *.a test
+	rm -f *.o *.so *.a howto-go-with-cpp
